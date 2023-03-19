@@ -1,255 +1,112 @@
-M300 - Lernumgebung
-======
-
-GitHub Account
-=======
-
-### **SSH-Key erstellen**
-Folgende Befehle im Bash ausführen:
-1. Account E-Mail von Github eingeben
-    ```
-    ssh-keygen -t rsa -b 4096 -C "beispiel@beispiel.com"
-    ```
-2. SSH-Key wird erstellt
-    ```
-    Generating public/private rsa key pair.
-    ```
-3. Namensabfrage für den Schlüssel
-   ```
-   Enter a file in which to save the key (~/.ssh/id_rsa): 
-   ```
-4. Passwort setzten (Im ideal Fall hinterlegt man das gerade beim SSH-Agent)
-    ```
-    Enter passphrase (empty for no passphrase): [Passwort]
-    Enter same passphrase again: [Passwort wiederholen]
-    ``` 
-
-### **SSH-Key dem SSH-Agent hinzufügen**
-
-1. Man muss den Key bei seinem Account unter den Einstellungen hinterlegen:
-
-![GitHub Konto SSH Keys](Screenshot/Screenshot%202023-03-13%20143259.png)
-
-Git Client
-======
-### **Client installieren**
-
-Den Git Client braucht man um Dateien auf Github Hoch und runter zuladen. [Git Download](https://git-scm.com/downloads)
-
-### **Client konfigurieren**
-1. Zunächst muss man zwei Befehle im Bash eingeben.
-
-```
-  git config --global user.name "<username>"
-  
-  git config --global user.email "<e-mail>"
-```
-### **Repository klonen**
-1. Als nächstes wollen wir ein Repository klonen, dies machen wir im Bash.
-
-```
-git clone https://gitlab.com/ch-tbz-it/Stud/m300/
-```
-2. Damit das funktioniert, muss man ins richtige Verzeichnis wechseln.
-```
-cd M300
-```
-3. Damit das Repository aktualisiert wird, muss man zunächst den Folgenden Befehl eingeben.
-
-```
-git pull
-```
-
-4. Um den Status anzuzeigen, kann man den folgenden Befehl eingeben.
-
-```
-git status
-```
-### **Repository herunterladen & aktualisieren**
-
-1. Zunächst wollen wir ein Ordner im gewünschten Verzeichnis wählen.
-
-```
-cd Wohin/auch/immer
-
-mkdir MeinLokalesRepository
-```
-2. Repository mit SSH klonen
-
-```
-git clone git@github.com:<Ihr Name>/my_M300.git
-```
-
-3.Jetzt machen wir wieder das gleiche wie bei der letzten Aufgabe. Somit aktualisiert und prüft man den Status.
-
-```
-git pull
-```
-
-### **Repository hochladen**
-
-1. Zum Verzeichnis wechseln
-
-```
-cd Pfad/zu/meinem/Repository
-```
-2. Die Daten hinzufügen, damit es beim Upload funktioniert
-
-```
-git add -A .
-```
-3. Die Bestätigung geben.
-
-```
-git commit -m "Mein Kommentar"
-```
-4. Upload pushen
-
-```
-git push
-```
-
-
-Virtualbox
-======
-
-### **Software herunterladen & installieren**
-
-Damit wir fortfahren können, müssen wir VirtualBox herunterladen. 
-[VirtualBox download](https://www.virtualbox.org/)
-
-### **ISO-Datei herunterladen**
-
-
-Damit unsere VM später funktioniert, brauchen wir logischerweise eine ISO, am besten verwendet man gerade diese: [Ubuntu-ISO](https://ubuntu.com/#download)
-
-Damit die ISO-Datei Reproduzierbar ist, muss man es im gewünschten Verzeichnis ablegen. Hierzu muss man achten, dass es auf dem lokalen PC abgespeichert ist.
-
-### **VM erstellen**
-
-Die Schwirigkeit beim erstellen der VM lag bei der Dateigrösse... Ich hatte 10GB laut Anleitung genommen, das hat aber leider nicht funktioniert, da die VM immer wieder abstürzte... Also habe ich mich dazu entschieden 25GB zu nehmen, dannch hat es funktioniert. Wichtig ist ebenfalls dass man das richtige Medium ausgewählt hat. Die ISO Datei muss logischer Weise vorhanden sein.
-
-### **VM einrichten**
-
-Wichtig ist, dass die VM läuft, dannch muss man sich beim Bash anmelden. Paketliste muss nei eingelesen werden und die Pakete Aktualisiert. Dafür braucht man die Befehle:
-
-```
-sudo apt-get update   
-
-#Paketlisten des Paketmanagement-Systems "APT" neu einlesen
-
-sudo apt-get upgrade   
-
-#Installierte Pakete wenn möglich auf verbesserte Versionen aktualisieren
-
-sudo reboot           #System-Neustart durchführen
-```
-
-### **Synaptic installieren**
-
-1. Synaptic ist zur Verwaltung von Debian-Paketen gemacht, kann aber auch mit RPM-Paketen umgehen. Darum müssen wir das herunterladen.
-```
- sudo apt-get install synaptic
-```
-2. Synaptic öffnen und apache installieren
-
-```
-sudo reboot
-```
-
-Damit wir testen können, ob das ganze funktoniert hat, muss man prüfen, ob der Standard-Content des Webservers localhost erreichbar ist.
+M300 - 20 Infrastruktur-Automatisierung
+===
 
 Vagrant
-======
+===
+1. Zunächst muss ein Verzeichnis für die virtuelle Maschine erstellt werden. In diesem Beispiel wird Ubuntu 2204Server verwendet. Anschließend navigieren Sie in dieses Verzeichnis, entweder in der Powershell oder unter Linux in der Bash.
 
-Was ist Vagrant eigentlich?
-
-Ein Vagrant-file ist für die Automatisierung oder für die Reproduzierbarkeit. Somit kann man mit einer einfachen ausführung Virtuelle Maschienen erstellen lassen. Man kann nicht nur Virtuelle Maschienen erstellen sondern auch verwalten.
-
-
-## **Software herunterladen & installieren**
-
-1. Vagrant kann man unter dieser Internetseite herunterladen [Vagrant-Download](https://www.vagrantup.com/)
-2. Für die Installation muss man nichts beachten. Wenn man den Download abgeschlossen hat, kann man mit dem Erstellen der Virtuellen Maschienen anfangen.
-
-## **Virtuelle Maschine erstellen**
-
-1. Damit wir ein sogennantes Vagrant-file erstellen können, müssen wir in ein gewünschtes Verzeichnis wechseln und dort einen Ordner erstellen. Nach dem erstellen des Ordners muss man auch gerade dort hin Navigieren.
-
+2. Mithilfe des folgenden Befehls können Sie ein Vagrantfile von der gewünschten Vagrant Box erstellen. Vagrant Boxen sind vordefinierte virtuelle Maschinen. In diesem Fall wird die Vagrant Box "ubuntu/xenial64" verwendet. Sie können diese Box auch in der Vagrant Cloud finden.
 ```
-cd Wohin/auch/immer
-mkdir MeineVagrantVM
-cd MeineVagrantVM
+vagrant init ubuntu/xenial64
 ```
-
-2. Vagrantfile erzeugen, VM erstellen und entsprechend starten:
-
+3. Verwenden Sie "vagrant up", um den Erstellungsprozess zu starten. Die Box oder das Image wird dann aus dem Internet heruntergeladen (falls es noch nicht lokal verfügbar ist) und eine virtuelle Maschine wird erstellt. Dabei werden alle im Vagrantfile festgelegten Konfigurationen berücksichtigt.
 ```
-vagrant init ubuntu/xenial64        
-vagrant up --provider virtualbox    
+vagrant up --provider virtualbox
 ```
+Mit dem Parameter "--provider virtualbox" können Sie festlegen, dass Vagrant Virtualbox als Provider verwendet. Vagrant unterstützt auch andere Provider wie beispielsweise Vmware oder Hyper-V.
 
-3. Da die VM nun läuft, kann man über ssh zugreifen.
-
+4. Sobald die virtuelle Maschine erstellt ist, können Sie sich mit dem Befehl "vagrant ssh" auf sie verbinden.
+   
 ```
 vagrant ssh
 ```
 
-4. VM über GUI ausschalten.
-
-### **Apache Webserver automatisiert aufsetzen**
+5. Hier finden Sie noch die wichtigsten Befehle für Vagrant, einschließlich Anweisungen zum Anhalten oder Löschen der virtuellen Maschine.
 
 
-Visual Studio Code
-======
+| Befehl | Beschreibung |
+| ------ | ------------ |
+| vagrant up | Startet und provisioniert eine neue virtuelle Maschine |
+| vagrant ssh | Verbindet sich per SSH zur laufenden VM |
+| vagrant halt | Stoppt die laufende VM |
+| vagrant destroy | Löscht die VM und alle zugehörigen Ressourcen |
+| vagrant status | Zeigt den Status aller VMs im aktuellen Verzeichnis an |
+| vagrant init | Initialisiert ein neues Vagrant-Projekt im Verzeichnis |
+| vagrant reload | Neustartet die VM und lädt die Vagrant-Konfiguration |
+| vagrant suspend | Pausiert die laufende VM |
+| vagrant resume | Nimmt eine pausierte VM wieder auf |
+| vagrant provision | Führt eine erneute Provisionierung auf der VM durch |
 
-### **Software herunterladen & installieren**
 
-1. Damit man eine effiziente Entwicklungsumgebung aufbauen kann, brachut man eine Applikation, welche dafür sorgt, dass man alle lokalen Repositories an einem Ort verwalten kann. Eine Gute Lösung dafür ist Visual Studio code.
+Packer
+===
 
-2. Mit dem Folgenden Link kann man Visual Studio code herunterladen: [Visual Studio Code Download](https://code.visualstudio.com/)
+AWS
+===
+Schwierigkeiten mit Windows Systemen:
+Es kann vorkommen, dass Packer nur mit Linux und macOS-Systemen funktioniert, da es bei der Verwendung von Windows zu Schwierigkeiten bei der Einrichtung der Virtual Machine kommen kann. Dies liegt daran, dass Packer hauptsächlich für Unix-Systeme entwickelt wurde und einige der notwendigen Abhängigkeiten nicht standardmäßig in Windows enthalten sind. Wenn Sie also Packer verwenden möchten, sollten Sie eine Linux- oder macOS-Maschine verwenden, um eine reibungslose Einrichtung und Verwendung sicherzustellen.
 
-### **Erweiterungen hinzufügen**
-1. Damit das arbeiten leichter fällt, verwenden wir noch vier wichtige Erweiterungen:
+Verbindung mit AWS in Vagrant
 
-* Markdown All in One
-* Vagrant Extension
-* vscode-pdf Extension
-* Auto Markdown TOC
+Vagrant kann mit verschiedenen Cloud Providern verbunden werden, einschließlich AWS von Amazon. Um AWS mit Vagrant zu nutzen, müssen Sie das vagrant-aws Plugin installieren und die dummy Box lokal hinzufügen:
+
+ruby
+```
+vagrant plugin install vagrant-aws
+```
+
+```
+$ vagrant box add dummy https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+```
+### **AWS vorbereiten**
+
+Folgen Sie diesen Schritten, um AWS für Vagrant vorzubereiten:
+
+1. Öffnen Sie die AWS-Website und erstellen Sie einen Amazon-Stammbenutzer, falls noch nicht vorhanden.
+
+    
+2. Ändern Sie den Rechenzentrum-Standort auf Frankfurt, um die schnellste Verbindung zu erhalten. Beachten Sie jedoch, dass sich dieser je nach Bedarf ändern kann.
+
+
+3. Erstellen Sie einen AWS-Benutzer, auf den Vagrant auf "EC2" zugreifen kann.
+
+4. Klicken Sie oben rechts auf Ihren Benutzernamen und dann auf "Sicherheitsanmeldeinformationen".
+
+5. Klicken Sie auf "Benutzer" und erstellen Sie einen neuen Benutzer mit dem Namen "vagrant".
+
+6. Weisen Sie diesem Benutzer die "Berechtigungsrichtlinie" "AmazonEC2FullAccess" zu.
+    
+7. Überprüfen Sie erneut, ob "Frankfurt" als Rechenzentrum ausgewählt ist.
+        
+8. Erstellen Sie eine Sicherheitsgruppe, die Datenverkehr über Port 22 und Port 80 an die VM zulässt.
+        
+9.  Erstellen Sie ein Schlüsselpaar und speichern Sie die .pem-Datei im Hauptverzeichnis des Vagrant-Projekts.
+Wählen Sie "RSA" und ".pem" und laden Sie die Datei mit dem privaten Schlüssel herunter.
+Achten Sie darauf, den Schlüssel nicht auf Github hochzuladen.
+
+### **Konfiguration des Vagrantfiles**
+
+Bearbeiten Sie das Vagrantfile und geben Sie die Zugriffsschlüssel, das .pem-Zertifikat und weitere Angaben zum Rechenzentrum-Standort und zum Instanztyp an:
+
+ruby
+
+```
+Vagrant.configure("2") do |config|
+    config.vm.box = "dummy"
   
-Diese erweiterungen kann man bei Visual Studio code an der Linken Seite finden... 
-
-![Erweiterungen bei Visual Studio Code](/Screenshots/Screenshot1.png)
-
-### **Einstellungen anpassen**
-
-1. Damit nicht alle Daten beim Cloud Repository hinzugefügt werden kann man eine sogennante .gitignor datei erstellen.
-2. Hierzu ein Screenshot wie die Aussieht:
-
-![Ausnahmen für Cloud-Repository](/Screenshots/Screenshot2.png)
-
-1. Ich würde euch meine gezeigten Einstellungen empfehlen.
-
-### **Repository hinzufügen & pushen**
-
-1. Damit man die Ganzen Änderungen hochladen kann, muss man an der Linken Seite unter Source Control gehen. Eine Nachricht hinzufügen und dann commit sagen. Nach dem man die Bestätigung gegeben hat und die Daten hochgeladen wurden, muss man noch Synchronisieren.
-
-![Upload der Veränderungen](/Screenshots/Screenshot3.png)
-
-Wichtige Befehle
-======
-
-| Befehl        | Beschreibung                                                    |
-|---------------|-----------------------------------------------------------------|
-| `git init`    | Erstellt ein neues, leeres Git-Repository im aktuellen Verzeichnis |
-| `git add`     | Fügt Änderungen der Arbeitskopie zum Staging-Bereich hinzu        |
-| `git commit`  | Speichert die Änderungen im Repository und erstellt eine Version |
-| `git clone`   | Erstellt eine lokale Kopie eines Remote-Repositories             |
-| `git pull`    | Lädt die neuesten Änderungen aus einem Remote-Repository herunter |
-| `git push`    | Überträgt lokale Änderungen an ein Remote-Repository             |
-| `git branch`  | Erstellt, löscht oder zeigt Branches im Repository an            |
-| `git merge`   | Führt zwei oder mehr Branches zusammen                           |
-| `git status`  | Zeigt den Status der Arbeitskopie und des Repositories an        |
-| `git log`     | Zeigt die Versionsgeschichte mit allen Commits an                |
-
-[&uarr; nach oben](https://github.com/TimTob/M300-Services)
+    config.vm.provider :aws do |aws, override|
+      aws.access_key_id = ""
+      aws.secret_access_key = ""
+      #aws.session_token = "SESSION TOKEN"
+      aws.keypair_name = "vagrant"
+      aws.region = "eu-central-1"
+      aws.ami = "ami-0d1ddd83282187d18"
+      aws.instance_type = "t2.micro"
+      aws.security_groups = "vagrant"
+      override.ssh.username = "ubuntu"
+      override.ssh.private_key_path = "vagrant.pem"
+    end
+    config.vm.synced_folder "html/", "/var/www/html"
+    config.vm.provision "shell", path: "scripts/apache.sh"
+  end
+```
