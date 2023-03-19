@@ -234,7 +234,7 @@ Diese erweiterungen kann man bei Visual Studio code an der Linken Seite finden..
 
 1. Damit man die Ganzen Änderungen hochladen kann, muss man an der Linken Seite unter Source Control gehen. Eine Nachricht hinzufügen und dann commit sagen. Nach dem man die Bestätigung gegeben hat und die Daten hochgeladen wurden, muss man noch Synchronisieren.
 
-![Upload der Veränderungen](../Screenshot/Hochladen%20der%20Dateien.png)
+![Upload der Veränderungen](/Screenshots/Screenshot3.png)
 
 Wichtige Befehle
 ======
