@@ -262,6 +262,12 @@ Testfälle
 | 3. Reproduzierbarkeit                              | VM kann genau gleich wieder erstellt werden | korrekt             |
 | 4. VM kann von jemand anderes auch erstellt werden | bei Luka genau gleich erstellt            | korrekt             |
 
+Reflexion
+======
+Zu beginn hatten wir sehr viele Probleme, jedoch als wir ein bisschen mit dem Thema bekannt wurden, viel alles leichter mit der Zeit.
+Wir arbeiten sehr effektiv als Gruppe und halfen uns gegenseitig mit jeglichen Problemen.
+Wenn ich so zurück denke lief es eigentlich sehr gut, weil wir konnten fast alle Kriterien erledigen und hochladen.
+
 Wichtige Befehle
 ======
 
