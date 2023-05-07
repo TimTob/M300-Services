@@ -236,6 +236,37 @@ Diese erweiterungen kann man bei Visual Studio code an der Linken Seite finden..
 
 ![Upload der Veränderungen](/Screenshots/Screenshot3.png)
 
+Automatischer Web-Server | MyVagrant Folder
+======
+Navigieren sie im Folder "M300_10-Toolumgebung/MyVagrant" dort sollten sie ein Vagrantfile finden.
+ 
+Mit diesem Vagranfile kann automatisch ein Web-Server erstellen ohne etwas gross zu machen. Mann muss nur diesen einen Befehl ausführen:
+```
+vagrant up
+```
+Wenn man diesen Befehl eingegeben hat, erstellt er eine Vm "Xenial64" und führt folgende Befehle aus:
+```
+config.vm.network "forwarded_port", guest:80, host:8080, auto_correct: true #Leitet den Port 80 der VM (Gastsystem) an den Port 8080 des Hostsystems weiter
+apt-get update
+sudo apt-get install -y apache2
+```
+Sobald die VM erstellt wurde kann man unter der URL http://localhost:8080 die apache Website öffnen
+```
+http://localhost:8080
+```
+Testfälle
+======
+| Testfall                                           | geschätztes Ergebniss                       | effektives Ergebnis |
+| -------------------------------------------------- | ------------------------------------------- | ------------------- |
+| 1. Zugang via SSH                                  | Zugriff auf VM möglich                      | korrekt             |
+| 2. Zugriff auf die Website                         | Zeigt apache-default-page                   | korrekt             |
+| 3. Reproduzierbarkeit                              | VM kann genau gleich wieder erstellt werden | korrekt             |
+| 4. VM kann von jemand anderes auch erstellt werden | bei Silvan genau gleich erstellt            | korrekt             |
+
+Reflexion
+======
+Am Anfang hatten wir eine schwierige Zeit, um in das Thema reinzukommen. Das war aber nicht lange so. Nachdem wir uns ein wenig schlau gemacht haben und ein paar Test durchgeführt haben, wurde uns immer mehr und mehr klar. Wir waren stehts bei der Sache und hatten alle Aufgaben versucht zu meistern. Wir waren so verbissen das wir mehrere Stunden an einem Problem sassen, bis es schlussendlich funktionierte. Ich finde wir haben sehr gut und schnell gearbeitet und ich bin zufrieden mit unserer Leistung.
+
 Wichtige Befehle
 ======
 
@@ -251,5 +282,415 @@ Wichtige Befehle
 | `git merge`   | Führt zwei oder mehr Branches zusammen                           |
 | `git status`  | Zeigt den Status der Arbeitskopie und des Repositories an        |
 | `git log`     | Zeigt die Versionsgeschichte mit allen Commits an                |
+
+M300 - 30 Container
+===
+
+Container
+===
+
+Ein Container ist ein Konzept der Informatik, das hilfreich ist, um Anwendungen in einer Umgebung auszuführen, die isoliert und unabhängig von anderen Anwendungen und dem Betriebssystem des Computers ist.
+
+Ein Vorteil von Containern ist, dass sie portabel sind und auf verschiedenen Betriebssystemen und Servern ausgeführt werden können, solange sie die Container-Software unterstützen. Durch die Verwendung von Containern können Anwendungen schneller bereitgestellt und skaliert werden, da sie unabhängig von der zugrunde liegenden Infrastruktur sind und somit schneller und einfacher bereitgestellt werden können.
+
+Docker
+===
+
+## Wichtige Befehle für Docker ##
+
+| Befehl | Beschreibung |
+| --- | --- |
+| `docker build` | Baut ein Docker-Image aus einem Dockerfile |
+| `docker run` | Startet einen Docker-Container aus einem Docker-Image |
+| `docker stop` | Stoppt einen laufenden Docker-Container |
+| `docker rm` | Löscht einen Docker-Container |
+| `docker rmi` | Löscht ein Docker-Image |
+| `docker ps` | Zeigt eine Liste der laufenden Docker-Container an |
+| `docker images` | Zeigt eine Liste der verfügbaren Docker-Images an |
+| `docker exec` | Führt einen Befehl in einem laufenden Docker-Container aus |
+| `docker-compose up` | Startet Docker-Container mit Docker Compose |
+| `docker-compose down` | Stoppt Docker-Container mit Docker Compose und löscht sie |
+| `docker save` | Speichert ein Docker-Image als Tar-Datei |
+| `docker load` | Lädt ein Docker-Image aus einer Tar-Datei |
+| `docker login` | Meldet sich bei Docker Hub oder einer anderen Docker-Registry an |
+| `docker push` | Lädt ein Docker-Image auf Docker Hub oder eine andere Docker-Registry hoch |
+| `docker pull` | Lädt ein Docker-Image von Docker Hub oder einer anderen Docker-Registry herunter |
+
+# Installation Docker Desktop und Aktivierung von WSL2 #
+
+1. Laden Sie Docker Desktop für Windows herunter. 
+
+Dazu kann man direk auf diese Webseite gehen. [Docker-Desktop](https://www.docker.com/products/docker-desktop/)
+
+2. Führen Sie den Installationsassistenten aus. 
+
+Öffnen Sie die heruntergeladene Datei "DockerDesktopInstaller.exe" und folgen Sie den Anweisungen des Installationsassistenten.
+
+3. Konfigurieren Sie Docker Desktop. 
+
+Nach Abschluss der Installation startet Docker Desktop automatisch. Möglicherweise müssen Sie jedoch den Computer neu starten, um Docker Desktop ordnungsgemäß zu starten. In den Einstellungen sollten man die Option "Use the WSL 2 based engine" auswählen. Wenn Sie dies tun, wird Docker Desktop WSL2 als Engine verwenden.
+
+4. Aktivieren Sie WSL2.
+
+Öffne Docker Desktop und gehene auf das Zahnrad. Unter "General" kann man nun WSL2 Aktivieren:
+
+![WSL2 aktivieren](/Screenshot/Docker_Screenshot.png)
+
+1. Installieren Sie eine Linux-Distribution.
+
+Da Docker Desktop WSL2 als Engine verwendet, benötigen Sie eine Linux-Distribution, die auf Ihrem Computer ausgeführt werden kann. Ich empfehle Ubuntu 22.04.2 LTS:
+
+![Ubuntu 22.04.2 LTS](/Screenshot/ubuntu_download.png)
+
+
+6. Überprüfen Sie die Installation.
+
+Öffnen Sie ein PowerShell-Fenster und führen Sie den folgenden Befehl aus, um zu überprüfen, ob Docker Desktop ordnungsgemäß installiert und konfiguriert ist:
+```
+docker run hello-world
+```
+Wenn alles funktioniert hat, sollte es folgendermassen aussehen:
+![Test Docker](/Screenshot/HelloWorld.png)
+
+
+
+Somit hat man Docker Desktop erfolgreich auf Windows installiert und WSL2 aktiviert.
+
+Docker Architecktur
+===
+
+![Architecktur Docker](/Screenshot/Grafik.png)
+
+## Docker Deamon ## 
+
+* Erstellen, Ausführen und Überwachen der Container
+
+* Bauen und Speichern von Images
+
+## Docker Client ##
+
+* Docker wird über die Kommandozeile (CLI) mittels des Docker Clients bedient
+
+* Kommuniziert per HTTP REST mit dem Docker Daemon
+
+## Images ##
+
+* Images sind gebuildete Umgebungen welche als Container gestartet werden können
+
+* Images sind nicht veränderbar, sondern können nur neu gebuildet werden.
+
+## Container ## 
+
+* Container sind die ausgeführten Images.
+
+* Ein Image kann beliebig oft als Container ausgeführt werden.
+  
+
+## Docker Registry ## 
+
+* In Docker Registries werden Images abgelegt und verteilt.
+
+Dockerfile
+===
+
+Ein Dockerfile ist ein Textdokument, das eine Abfolge von Anweisungen enthält, mit denen ein Docker-Image erstellt werden kann. Um ein Dockerfile zu erstellen, kann man zuerst ein neues Verzeichnis anlegen und darin eine Datei mit dem Namen "Dockerfile" erstellen.
+
+Anschliessend kann das Image wie folgt gebuildet werden:
+```
+    $ docker build -t mysql .
+```
+Starten:
+```
+    $ docker run --rm -d --name mysql mysql
+```
+Funktionsfähigkeit überprüfen:
+```
+    $ docker exec -it mysql bash
+```
+Überprüfung im Container:
+```
+    $ ps -ef
+    $ netstat -tulpen
+```
+
+Netzwerk-Anbindung
+===
+
+Das wichtigste bei den Netzwerk Anbindungen ist, dass man weiss wie man Aussenstehenden Personen zugriff gebenkann. Das ganze funktioniert mit Ports. Dafür braucht man folgenden Behfel: -p oder -P.
+
+Um eine Verbindung zu einem Docker-Container herzustellen, der eine Anwendung ausführt, die auf einen bestimmten Port hört, muss der Port an den Host oder das Netzwerk weitergeleitet werden. Dazu kann man im Dockerfile die Ports, die die Anwendung nutzt, über die Anweisung "EXPOSE" eintragen. Dies ermöglicht es, dass andere Container oder Anwendungen über das Netzwerk auf den Container zugreifen und mit der Anwendung kommunizieren können.
+
+Volumes
+===
+
+Bisher gingen alle Änderungen im Dateisystem verloren, wenn der Docker-Container gelöscht wurde. Um Daten auch über das Löschen des Containers hinaus zu erhalten, bietet Docker verschiedene Optionen:
+
+* Daten auf dem Host ablegen: Man kann die Daten auf dem Hostsystem speichern, auf dem Docker läuft. Dadurch bleiben die Daten auch erhalten, wenn der Container gelöscht wird.
+
+* Daten zwischen Containern teilen: Man kann Daten zwischen verschiedenen Containern teilen. Dadurch können mehrere Container auf dieselben Daten zugreifen und die Daten bleiben erhalten, auch wenn einer der Container gelöscht wird.
+
+* Eigene Volumes erstellen: Man kann eigene Volumes erstellen, um Daten zu speichern. Diese Volumes sind unabhängig vom Container und können auch von anderen Containern genutzt werden. Dadurch bleiben die Daten erhalten, auch wenn der Container gelöscht wird.
+
+Diese Optionen erlauben es, Daten auch über das Löschen eines Containers hinaus zu behalten und erleichtern die Verwaltung von Daten in Docker-Containern.
+
+## Volume - Verzeichnis ##
+
+Ein Volume ist ein spezielles Verzeichnis auf dem Hostsystem, in dem ein oder mehrere Docker-Container ihre Daten speichern können. Volumes bieten verschiedene nützliche Funktionen für die Verwaltung von persistenter oder gemeinsam genutzter Daten.
+
+## Wie erstellt man ein neues Volume /data Verzeichnis? ##
+
+Man muss den Folgenden Befehl einggeben, dass ein neues Docker Volume angelegt wird.
+
+```
+docker volume create data
+```
+
+Mit dem Folgenden Befehl kann man Überprüfen, ob der Befehl funktioniert hat. Somit werden alle verfügbaren Docker-Volumes aufgelistet.
+```
+docker volume ls
+```
+
+Damit man das Volume verwenden kann, muss man die folgenden Zeilen im Docker-Compose hinzufügen. Smoit wird "my-data" durch den gewünschten Namen des Volumes ersetzt.
+```
+volumes:
+  my-data:
+```
+
+## Datencontainer ##
+
+Wie starten man einen Container? Und wie kommen andere Personen darauf?
+
+Um den Container zu starten, muss man den folgenden Befehl eingeben:
+```
+docker run
+```
+Um auf ein Container zugreifen zukönnen, muss man folgenden Behfel eingeben:
+```
+--volumes-from
+```
+
+## Named Volumes ##
+
+Docker Volume ist seit Version 1.9 ein wichtiger Befehl, zur Verwaltung von Volumes auf einem Docker Host. Mit dem Befehl kann man ganz viele Sachen verwalten. Alle diese hier aufzuzählen macht aber keinen Sinn.
+
+
+Image-Bereitstellung
+===
+
+Es existieren zahlreiche Optionen, um Images bereitzustellen. Man kann sie durch das Erstellen von Dockerfiles erstellen, von einer Registry mit "docker pull" herunterladen oder mithilfe von "docker load" aus einer Archivdatei installieren.
+
+## Namensgebung für Images ##
+
+Images bestehen aus einem Namen und einer Version, wobei bei fehlender Angabe automatisch ":latest" hinzugefügt wird. Um Images bereitzustellen, sind präzise und beschreibende Namen und Tags von entscheidender Bedeutung. Die Namen und Tags werden entweder beim Bauen der Images oder durch den Befehl "docker tag" festgelegt.
+
+Bei den Tag-Namen muss man auf ein Paar Sachen achten:
+
+* Gross- und Kleinbuchstaben
+* Zahlen
+* Symbolen . und -
+* nicht länger als 128 Zeichen
+* erstes Zeichen kein . oder -
+
+Bei der Entwicklung eines Workflows ist es äußerst wichtig, sinnvolle Namen für Repositories und Tags zu verwenden. Docker hat nur wenige Einschränkungen bezüglich der Namensgebung und erlaubt jederzeit die Erstellung oder Löschung von Namen. Es obliegt also dem Entwicklungsteam, ein angemessenes Namensschema zu entwerfen und anzuwenden
+
+## Warnung vor dem latest-Tag ##
+
+Wenn bei einem "docker run" oder "docker pull" Befehl kein spezifischer Tag angegeben wird, verwendet Docker standardmäßig das Image, das mit "latest" gekennzeichnet ist. Wenn kein solches Image vorhanden ist, wird eine Fehlermeldung ausgegeben.
+
+# Docker Hub #
+
+Ein eigenes Images bereitzustellen ist am einfachsten, wenn man Dockers Hub verwendet.
+
+Das Hub ist soweit kostenlos, man kann aber auch für Repositories von privaten Personen zahlen.
+
+## Docker Hub einrichten ##
+
+1. Zuerst muss man achten, dass man einen Docker Hub Account hat.
+2. Image erstellen
+
+```
+docker tag mysql username/mysql
+```
+
+3. Um das Image hochzuladen, muss man den Befehl push mit verwenden.
+
+```
+docker push username/mysql
+```
+
+Dannach muss das Image noch beschrieben werden.
+
+## Weitere Befehle ##
+
+Nach einem Image kann man suchen mit folgendem Befehl:
+
+```
+docker search mysql
+```
+Um ein Image herunterzuladen, muss man den befehl pull verwenden:
+
+```
+docker pull ubuntu
+```
+
+# Export/Import von Container und Images #
+
+Damit man Images zwischen zwei Hots hin und her verschieben kann, braucht man die Befehle docker export und docker import. Damit man Verzeichnisse hin und her kopieren kann, verwenden wir docker save und docker load.
+```
+docker export
+```
+
+```
+docker import
+```
+
+
+Um seine eigenen Images sehen zu können, muss man folgenden Befehl ausführen:
+
+```
+/vagrant/mysql$ docker images
+```
+Wie kann ich mein Images wiederherstellen?
+
+```
+docker load
+```
+
+
+## TAR-Format ##
+
+Das TAR-Format dient der Archivierung und Komprimierung von Dateien und Verzeichnissen und hat seinen Ursprung in der Sicherung von Daten auf Magnetbändern. Heutzutage wird es oft verwendet, um Dateien in einer einzelnen, komprimierten Datei für die Übertragung oder Speicherung zu archivieren. Um die Dateigröße weiter zu reduzieren, können TAR-Dateien mit verschiedenen Komprimierungsverfahren wie Gzip, bzip2 oder XZ komprimiert werden. Im Bereich von Docker-Images werden TAR-Dateien häufig als Archivdateien verwendet.
+
+# Private Registry #
+
+Es gibt verschiedene Möglichkeiten, Images neben dem Docker Hub bereitzustellen, aber die manuelle Erstellung oder der Export/Import von Images sind suboptimale Optionen. Das Erstellen von Images aus Dockerfiles auf jedem Host ist langsam und kann zu unterschiedlichen Images führen, während das Exportieren und Importieren von Images knifflig und fehleranfällig sein kann. Stattdessen wird empfohlen, eine andere Registry zu verwenden, die selbst gehostet oder von einem anderen Unternehmen betrieben wird.
+
+M300 - 35 Container-Sicherheit
+=== 
+
+Protokollieren & Überwachen
+===
+
+In der Informatik ist die Sicherheit immer an der ersten Stelle. Darum sollte man ebenfalls bei den Container auf die Sicherheit achten. Bei Komplexen Systemen zb. (Wenn mehrere Container mit eineinander verbunden sind.)  ist es natürlich noch wichtiger, dass die Systeme reibbungslos laufen. 
+
+Für die Sicherheit der Container ist das protokollieren einer der Wichtigsten Punkten. Wenn man keine Logging-Software angegeben hat, protokolliert Docker nur das was an STDOUT STDERR geschickt wird.
+
+Wenn du eine Anwendung in einem Docker-Container startest, kannst du das Verhalten der Anwendung überwachen, indem du die Ausgabe auf die Standardausgabe (STDOUT) oder die Standardfehlerausgabe (STDERR) sendest. STDOUT und STDERR sind Kanäle, über die Anwendungen mit der Umgebung kommunizieren. STDOUT wird normalerweise für die normale Ausgabe von Anwendungen verwendet, während STDERR für Fehlermeldungen und Warnungen verwendet wird.
+
+Docker protokolliert standardmäßig alles, was an STDOUT oder STDERR geschickt wird, und speichert die Ausgabe in einem Container-Log-File. Dieses Log-File kann dann verwendet werden, um das Verhalten der Anwendung zu überwachen oder Probleme zu erkennen.
+
+Sinnvoll ist natürlich, dass man diese Logs dann auch anschauen kann. Dazu muss man folgenden Behfel eingeben:
+
+```
+docker logs
+```
+
+| Logging-Methode | Beschreibung                                                                                     |
+|----------------|-------------------------------------------------------------------------------------------------|
+| json-file       | Diese Methode schreibt die Container-Logs als JSON-Datei auf die Festplatte des Host-Systems.   |
+| syslog          | Diese Methode schickt die Logs an das System-Logging-Tool (syslog) des Host-Systems.           |
+| journald        | Diese Methode schickt die Logs an das System-Logging-Tool (journald) des Host-Systems.         |
+| splunk          | Diese Methode schickt die Logs an eine Splunk-Instanz. Splunk ist eine Software zur Analyse von Maschinendaten. |
+| awslogs         | Diese Methode schickt die Logs an Amazon CloudWatch Logs. CloudWatch Logs ist ein verwalteter Log-Service von Amazon Web Services. |
+
+Diese Liste ist nicht vollständig und es gibt noch weitere Logging-Methoden, die man über --log-driver auswählen kann. Man kann auch eigene Logging-Methoden implementieren, indem man ein Docker-Plugin erstellt.
+
+### Wichtige Behfehle für Standard-Logging ###
+
+| Befehl                                | Beschreibung                                                                                                                                                                      |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `$ docker run --name logtest ubuntu bash -c 'echo "stdout"; echo "stderr" >>2'` | Startet einen neuen Container `logtest` auf Basis des `ubuntu`-Images. Der Befehl gibt "stdout" auf STDOUT aus und gibt "stderr" auf STDERR aus. |
+| `$ docker logs logtest`               | Zeigt die Logs des Containers `logtest` an.                                                                                                                                        |
+| `$ docker rm logtest`                 | Entfernt den Container `logtest`.                                                                                                                                                  |
+| `$ docker run -d --name streamtest ubuntu bash -c 'while true; do echo "tick"; sleep 1; done;'` | Startet einen neuen Container `streamtest` auf Basis des `ubuntu`-Images. Der Befehl gibt alle Sekunde "tick" aus. |
+| `$ docker logs streamtest`            | Zeigt die Logs des Containers `streamtest` an.                                                                                                                                     |
+| `$ docker logs streamtest \| wc -l`   | Zählt die Anzahl der Zeilen in den Logs des Containers `streamtest`.                                                                                                              |
+| `$ docker rm streamtest`              | Entfernt den Container `streamtest`.                                                                                                                                                |
+
+Protokollierung System-Log des Hosts:
+```
+    docker run -d --log-driver=syslog ubuntu bash -c 'i=0; while true; do i=$((i+1)); echo "docker $i"; sleep 1; done;'
+```
+```
+    $ tail -f /var/log/syslog
+```
+
+### Überwachen und Benachrichtigen ###
+
+Wenn man als System Administrator bei einem Microservices-System arbeitet, ist man um jede Hilfe froh. Deswegen werden in solchen grossen unternehmen immer Benachrichtungen integriert. Damit man eine Benachrichtung bekommt, wenn ein System schiefläuft. Damit man nicht Hunderte oder Tausende Container aufeinmal im überblick haben muss, gibt es zum beispiel "Container Advisor". Dieses Tool von Google ermöglicht es alle Systeme auf einen Blick zu sehen. Somit ist die Warscheindlichkeit kleiner, dass ein System den Geist aufgibt.
+
+ Da cAdvisor selbst als Container zur Verfügung steht, können wir das Tool in kürzester Zeit zum Laufen bringen. Gestartet wird der cAdvisor-Container mit folgenden Argumenten:
+
+    $ docker run -d --name cadvisor -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/sys:ro -v /var/lib/docker/:/var/lib/docker:ro -p 8080:8080
+
+
+ 
+Container sichern & beschränken
+===
+
+
+## Sicherheitsprobleme ##
+
+
+
+## Berechtigungs-Verteilung ##
+
+**Kernel Exploits** <br>
+Im Gegensatz zu einer Virtual Machine wird der Kernel von Containern gemeinsam mit dem Host verwendet, wodurch Schwachstellen im Kernel erhebliche Auswirkungen haben können. Sollte ein Container eine Kernel Panic verursachen, führt das zum Absturz des gesamten Hosts. In VMs ist die Situation besser, da ein Angreifer sowohl den VM-Kernel als auch den Hypervisor angreifen müsste, bevor er auf den Host-Kernel zugreifen kann.
+
+**Denial-of-Service-(DoS-)Angriffe** <br>
+Alle Container teilen sich die Ressourcen des Kernels. Wenn ein Container den Zugriff auf bestimmte Ressourcen für sich beansprucht, wie beispielsweise Speicher oder User IDs (UIDs), kann er die anderen Container auf dem Host blockieren und so einen Denial-of-Service-Angriff verursachen, bei dem berechtigte Benutzer das System nicht mehr nutzen können.
+
+**Container-Breakouts** <br>
+Wenn ein Angreifer Zugriff auf einen Container erhält, sollte er nicht in der Lage sein, auf andere Container oder den Host zuzugreifen. Da die Benutzer nicht durch Namensräume getrennt sind, erben alle Prozesse, die aus dem Container ausbrechen, auf dem Host dieselben Privilegien wie im Container. Wenn man im Container root-Zugriff hat, hat man auch auf dem Host root-Zugriff. Privilege-Escalation-Angriffe müssen ebenfalls berücksichtigt werden, bei denen ein Angreifer mehr Rechte erhält, als ihm zustehen – oft durch einen Fehler im Anwendungscode, der zusätzliche Berechtigungen erfordert. Da sich die Container-Technologie noch in der Anfangsphase befindet, sollte man davon ausgehen, dass Container-Breakouts unwahrscheinlich, aber möglich sind.
+
+**Vergiftete Images** <br>
+Es ist schwierig zu wissen, ob die verwendeten Images sicher sind, nicht manipuliert wurden und von der erwarteten Quelle stammen. Ein Angreifer kann einen dazu bringen, sein manipuliertes Image auszuführen und somit sowohl den Host als auch die eigenen Daten gefährden. Es ist auch wichtig sicherzustellen, dass die ausgeführten Images aktuell sind und keine bekannten Sicherheitslücken aufweisen.
+
+**Offengelegte Geheimnisse** <br>
+Wenn ein Container auf einen Service oder eine Datenbank zugreift, muss er möglicherweise ein Geheimnis wie einen API-Schlüssel oder Benutzername und Passwort kennen. Wenn ein Angreifer auf dieses Geheimnis zugreifen kann, kann er auch den Service oder die Datenbank verwenden. Dieses Problem wird in einer Microservices-Architektur verschärft, da Container häufig gestoppt und neu gestartet werden. Im Vergleich zu einer Architektur mit einer begrenzten Anzahl von langlebigen VMs ist dies ein erhöhtes Risiko.
+
+## Container absichern ##
+
+Natürlich können die konkreten Schritte zur Absicherung von Containern je nach Anwendungsfall und Umgebung variieren, aber hier sind einige konkrete Beispiele:
+
+1. Verwenden von Images von vertrauenswürdigen Quellen oder von internen Registern, um sicherzustellen, dass die Images keine Malware oder andere bösartige Software enthalten.
+
+2. Vermeiden von der Ausführung von Containern mit root-Privilegien, um zu verhindern, dass Angreifer auf Kernel-Ebene oder darüber hinaus gelangen können.
+
+3. Begrenzen von Ressourcen (z.B. Speicher oder CPU) für jeden Container, um DoS-Angriffe und andere Arten von Ressourcenverbrauch zu verhindern.
+
+4. Verwenden von Network Policies, um die Netzwerkkommunikation zwischen Containern oder von Containern zum Host-System zu beschränken.
+
+5. Überwachen von Container-Logs und Ereignissen, um verdächtige Aktivitäten oder Anomalien zu erkennen und darauf zu reagieren.
+
+6. Aktualisieren von Images und Containern auf die neuesten Versionen, um sicherzustellen, dass Sicherheitslücken oder Schwachstellen behoben wurden.
+
+7. Verwendung von Verschlüsselung für die interne Kommunikation zwischen Containern oder für die Speicherung von Daten in Containern.
+
+8. Einschränken des Zugriffs auf Host-Ressourcen wie Dateien oder Verzeichnisse durch die Verwendung von Volumes oder Bind Mounts mit gezielten Berechtigungen.
+
+Weitere Massnahmen:
+
+    Beim Einsatz sicherheitskritischer Container:
+
+M300 - 40 Kubernetes (K8s)
+===
+
+Grundbegriffe
+===
+Service Discovery ist der Prozess, bei dem Clients Verbindungsinformationen zu passenden Instanzen eines Services erhalten. Es hilft dabei, die Interaktion und Koordination zwischen den verschiedenen Komponenten eines verteilten Systems oder einer Mikroservices-Architektur zu erleichtern.
+
+Service Discovery Health Checking was ist das ?
+
+Health Checking ist eine wichtige Funktion von Service Discovery, die dazu beiträgt, die Gesundheit von Instanzen eines Services zu überwachen. Hierbei wird in regelmäßigen Abständen überprüft, ob die Instanzen des Services erreichbar sind und ob sie ordnungsgemäß funktionieren.
+
+Service Discovery Failover was ist das ?
+
+Failover ist eine weitere wichtige Funktion von Service Discovery, die dazu beiträgt, die Ausfallsicherheit von verteilten Systemen und Mikroservices-Architekturen zu verbessern. Wenn eine Instanz eines Services ausfällt oder nicht mehr erreichbar ist, kann Service Discovery automatisch auf eine andere Instanz des Services umschalten, um sicherzustellen, dass die Anfragen weiterhin bearbeitet werden können.
+
+Lastenverteilung
+
+Lastverteilung bezeichnet den Prozess der Verteilung von Arbeitslasten (z.B. Anfragen, Berechnungen oder Daten) auf mehrere parallel arbeitende Systeme oder Ressourcen.
 
 [&uarr; nach oben](https://github.com/TimTob/M300-Services)
