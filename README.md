@@ -748,4 +748,8 @@ Kubernetes Cluster
 ===
 Ein Kubernetes-Cluster besteht aus einem Master-Node, der die Kontrolle und Verwaltung des Clusters übernimmt, und mehreren Worker-Nodes, die die eigentlichen Anwendungen ausführen. Durch die Verwendung von Kubernetes-Clustern können Unternehmen ihre Anwendungen effizienter bereitstellen, skalieren und verwalten und gleichzeitig die Verfügbarkeit und Skalierbarkeit ihrer Anwendungen verbessern.
 
+Reflexion
+======
+Da wir schon ein bisschen wussten, wie viel Arbeit auf uns zukommen wird, haben wir dieses mal ein bisschen mehr gas gegeben und konnten so viel flüssiger und effektiver arbeiten. Wir hatten auch viel weniger probleme, weil wir wussten, die Doku ist sowieso fehlerhaft. Dies führte dazu, dass wir direkt auf Google gegangen sind und wie gesagt so viel schneller recherchieren konnten. Alles in allem konnte ich relativ viel mitnehmen und werde es hoffentlich auch in der Zukunft gut gebrauchen können.
+
 [&uarr; nach oben](https://github.com/TimTob/M300-Services)
