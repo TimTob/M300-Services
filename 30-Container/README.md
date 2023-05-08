@@ -49,3 +49,15 @@ Dieses Dockerfile erstellt ein Image für einen Apache Webserver auf Basis des o
 
 
 Das erstellte Image des Apache-Webservers kann sowohl in einem privaten Unternehmen als auch auf Docker-Hub hochgeladen werden, um es später auf anderen Systemen oder in der Cloud zu verwenden. Durch das Hochladen in ein privates Unternehmen können Sie das Image innerhalb Ihres Netzwerks oder auf Ihren eigenen Servern speichern und verteilen, während das Hochladen auf Docker-Hub das Image der breiten Öffentlichkeit zugänglich macht.
+
+Testfälle
+======
+| Testfall                                                  | geschätztes Ergebniss                       | effektives Ergebnis |
+| --------------------------------------------------------- | ------------------------------------------- | ------------------- |
+| 1. Image erstellen                                        | Image wird erfolgreich erstellt             | korrekt             |
+| 2. Container erstellt                                     | Container wird erfolgreich erstellt         | korrekt             |
+| 3. Container ist abrufbar                                 | Container konnte abgerufen werden           | korrekt             |
+| 4. Reproduzierbarkeit                                     | Container wird genau gleich erstellt        | korrekt             |
+| 5. Container kann von jemand anderes auch erstellt werden | bei Silvan genau gleich erstellt            | korrekt             |
+
+[&uarr; nach oben](https://github.com/TimTob/M300-Services/tree/main/30-Container)
