@@ -334,13 +334,13 @@ Nach Abschluss der Installation startet Docker Desktop automatisch. Möglicherwe
 
 Öffne Docker Desktop und gehene auf das Zahnrad. Unter "General" kann man nun WSL2 Aktivieren:
 
-![WSL2 aktivieren](/Screenshot/Docker_Screenshot.png)
+![WSL2 aktivieren](/Screenshots/Docker_Screenshot.png)
 
 1. Installieren Sie eine Linux-Distribution.
 
 Da Docker Desktop WSL2 als Engine verwendet, benötigen Sie eine Linux-Distribution, die auf Ihrem Computer ausgeführt werden kann. Ich empfehle Ubuntu 22.04.2 LTS:
 
-![Ubuntu 22.04.2 LTS](/Screenshot/ubuntu_download.png)
+![Ubuntu 22.04.2 LTS](/Screenshots/ubuntu_download.png)
 
 
 6. Überprüfen Sie die Installation.
@@ -350,7 +350,7 @@ Da Docker Desktop WSL2 als Engine verwendet, benötigen Sie eine Linux-Distribut
 docker run hello-world
 ```
 Wenn alles funktioniert hat, sollte es folgendermassen aussehen:
-![Test Docker](/Screenshot/HelloWorld.png)
+![Test Docker](/Screenshots/HelloWorld.png)
 
 
 
@@ -359,7 +359,7 @@ Somit hat man Docker Desktop erfolgreich auf Windows installiert und WSL2 aktivi
 Docker Architecktur
 ===
 
-![Architecktur Docker](/Screenshot/Grafik.png)
+![Architecktur Docker](/Screenshots/Grafik.png)
 
 ## Docker Deamon ## 
 
@@ -698,8 +698,6 @@ Eine Begrenzung des verfügbaren Speichers kann dazu beitragen, DoS-Angriffe und
 **Begrenzung des CPU-Einsatzes** <br>
 Wenn ein Angreifer einen Container oder eine Gruppe von Containern dazu bringt, die CPU des Hosts vollständig auszulasten, kann dies zu einem DoS-Angriff führen. In Docker wird die CPU-Zuteilung über eine relative Gewichtung ermittelt.
 
-[&uarr; nach oben](https://github.com/Luka-Petkovic/M300-Services)
-
 Kontinuierliche Integration
 ===
 Kontinuierliche Integration (CI) ist ein Prozess in der Software-Entwicklung, bei dem Komponenten einer Anwendung fortlaufend zusammengefügt werden. Das Ziel von CI besteht darin, die Qualität der Software zu verbessern. Der Prozess beinhaltet typischerweise das Übersetzen und Verknüpfen von Anwendungsteilen sowie die Durchführung von automatisierten Tests und die Erstellung von Software-Metriken zur Messung der Softwarequalität. Der gesamte Vorgang wird automatisch durch das Einchecken in die Versionsverwaltung ausgelöst.
@@ -718,7 +716,7 @@ Die folgenden Grundsätze sind entscheidend für eine erfolgreiche Umsetzung von
 **Unittest** <br>
 Ein Modultest, auch bekannt als Komponententest oder Unittest, wird in der Softwareentwicklung angewendet, um die funktionalen Einzelteile (Module) von Computerprogrammen zu testen und ihre korrekte Funktionalität zu überprüfen.
 
-![Architecktur Docker](/Screenshot/Unittest.png)
+![Architecktur Docker](/Screenshots/Unittest.png)
 
 **Jenkins & Blue Ocean** <br>
 Travis CI ist ein Cloud-basiertes CI-System, das sich durch eine gute Integration mit GitHub auszeichnet.
