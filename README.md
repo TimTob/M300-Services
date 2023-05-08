@@ -629,10 +629,6 @@ Container sichern & beschränken
 ===
 
 
-## Sicherheitsprobleme ##
-
-
-
 ## Berechtigungs-Verteilung ##
 
 **Kernel Exploits** <br>
@@ -669,10 +665,6 @@ Natürlich können die konkreten Schritte zur Absicherung von Containern je nach
 7. Verwendung von Verschlüsselung für die interne Kommunikation zwischen Containern oder für die Speicherung von Daten in Containern.
 
 8. Einschränken des Zugriffs auf Host-Ressourcen wie Dateien oder Verzeichnisse durch die Verwendung von Volumes oder Bind Mounts mit gezielten Berechtigungen.
-
-Weitere Massnahmen:
-
-    Beim Einsatz sicherheitskritischer Container:
 
 Weitere Sicherheitstipps
 ===
