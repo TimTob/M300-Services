@@ -4,4 +4,4 @@ docker build -t mein-apache-server .
 ```
 
 Nachdem ausführen des Befehls sollte das so aussehen:
-![Architecktur Docker](Screenshots/Image1.png)
+![Architecktur Docker](/Screenshots/Image1.png)

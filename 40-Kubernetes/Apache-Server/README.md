@@ -4,7 +4,7 @@ kubectl apply -f Apache.yaml
 ```
 
 So sollte es aussehen nachdem ausführen von "kubectl apply -f Apache.yaml":
-![Architecktur Docker](Screenshots/KuberApache1.png)
+![Architecktur Docker](/Screenshots/KuberApache1.png)
 
 ### **Lösche denn erstellten Apache-Server**
 ```
@@ -16,4 +16,4 @@ Nachdem ausführen des Befehls "kubectl apply -f Apache.yaml" kann man automatis
 
 Unter http://localhost:30080 findet man nun dies:
 
-![Architecktur Docker](Screenshots/KuberApache2.png)
+![Architecktur Docker](/Screenshots/KuberApache2.png)
